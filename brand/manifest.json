@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 1,
+  "generator": "brand/scripts/generate.mjs",
+  "source": {
+    "geometry": "brand/src/geometry.json",
+    "specification": "brand/src/spec.json",
+    "geometrySha256": "7d3005047d55b027852689e8619e1365b503fd787f503acdb34b974f5e7dc6f7",
+    "specificationSha256": "dd5f86203dd1d80c3749c3ae385e27eb4ac275b1573b7614365d7576780ef74a"
+  },
+  "specification": {
+    "name": "Runcast Forward Terminals RC monogram",
+    "version": 1,
+    "masterSize": 1254,
+    "brandBlack": "#050707",
+    "brandTeal": "#67D5D6",
+    "dotOutlineWidth": 10,
+    "microDotOutlineWidth": 32,
+    "clearSpace": 77,
+    "minimumSize": 32,
+    "microMinimumSize": 16,
+    "wordmarkFamily": "Space Grotesk",
+    "wordmarkWeight": 700
+  },
+  "files": [
+    {
+      "path": "apps/mobile/assets/android-icon-background.png",
+      "role": "mobile-android-background",
+      "bytes": 5725,
+      "sha256": "6e4bd5c8b0905fa8986d478f6725fde1e177f942538ec73576cf7b83cd28d157"
+    },
+    {
+      "path": "apps/mobile/assets/android-icon-foreground.png",
+      "role": "mobile-android-foreground",
+      "bytes": 19841,
+      "sha256": "a698cbe5ff531532ebe0857787b379d06e66b5edb43d59c554b60ef698b68753"
+    },
+    {
+      "path": "apps/mobile/assets/android-icon-monochrome.png",
+      "role": "mobile-android-monochrome",
+      "bytes": 18156,
+      "sha256": "2e68d5df6364f96f8458aa7e02a4937419c23630e9a1481e1a605a07ddcdf0a4"
+    },
+    {
+      "path": "apps/mobile/assets/favicon.png",
+      "role": "mobile-web-favicon",
+      "bytes": 1176,
+      "sha256": "cd2dfdcc5231d55ead3966e6478ffd239ebac4365956008a5f3dec9820606cf7"
+    },
+    {
+      "path": "apps/mobile/assets/icon.png",
+      "role": "mobile-app-icon",
+      "bytes": 21015,
+      "sha256": "2ec98b0f7cdb7b6d101204c8486c2756a75736cd2313677db61f69ef002b58bd"
+    },
+    {
+      "path": "apps/mobile/assets/notification-icon.png",
+      "role": "mobile-notification-icon",
+      "bytes": 1519,
+      "sha256": "a1b720d8bfda977eef274107a17f0d08a1ba066bfa22a537caceb1bc18059db8"
+    },
+    {
+      "path": "apps/mobile/assets/splash-icon.png",
+      "role": "mobile-splash",
+      "bytes": 19841,
+      "sha256": "a698cbe5ff531532ebe0857787b379d06e66b5edb43d59c554b60ef698b68753"
+    },
+    {
+      "path": "apps/mobile/src/design/runcastGeometry.ts",
+      "role": "mobile-vector-source",
+      "bytes": 17014,
+      "sha256": "cefb5f58809c6ecaee46be598da063d2f4fbe2819e2d40f01cc90743d991cacd"
+    },
+    {
+      "path": "apps/web/public/favicon.svg",
+      "role": "vite-favicon",
+      "bytes": 17388,
+      "sha256": "b1af4bb96d550786676a7527a1982017615585f59169ffcd91476bffb8aabc5a"
+    },
+    {
+      "path": "apps/web/public/runcast-mark.svg",
+      "role": "vite-header-mark",
+      "bytes": 17250,
+      "sha256": "4c425d107d09fa1088f13670693a82eac1c63b3b16a0df546fe65e6b1b3e9a71"
+    },
+    {
+      "path": "brand/png/platform/android-adaptive-background-1024.png",
+      "role": "android-adaptive-background",
+      "bytes": 5725,
+      "sha256": "6e4bd5c8b0905fa8986d478f6725fde1e177f942538ec73576cf7b83cd28d157"
+    },
+    {
+      "path": "brand/png/platform/android-adaptive-foreground-1024.png",
+      "role": "android-adaptive-foreground",
+      "bytes": 19841,
+      "sha256": "a698cbe5ff531532ebe0857787b379d06e66b5edb43d59c554b60ef698b68753"
+    },
+    {
+      "path": "brand/png/platform/android-monochrome-1024.png",
+      "role": "android-themed-icon",
+      "bytes": 18156,
+      "sha256": "2e68d5df6364f96f8458aa7e02a4937419c23630e9a1481e1a605a07ddcdf0a4"
+    },
+    {
+      "path": "brand/png/platform/ios-app-icon-1024.png",
+      "role": "ios-and-general-app-icon",
+      "bytes": 21015,
+      "sha256": "2ec98b0f7cdb7b6d101204c8486c2756a75736cd2313677db61f69ef002b58bd"
+    },
+    {
+      "path": "brand/png/platform/notification-96.png",
+      "role": "android-white-alpha-notification-exception",
+      "bytes": 1519,
+      "sha256": "a1b720d8bfda977eef274107a17f0d08a1ba066bfa22a537caceb1bc18059db8"
+    },
+    {
+      "path": "brand/png/platform/splash-1024.png",
+      "role": "transparent-splash-artwork",
+      "bytes": 19841,
+      "sha256": "a698cbe5ff531532ebe0857787b379d06e66b5edb43d59c554b60ef698b68753"
+    },
+    {
+      "path": "brand/png/ui/runcast-mark-16@1x.png",
+      "role": "ui-mark-16-at-1x",
+      "bytes": 410,
+      "sha256": "c6c89ccacccaff7b46e5fabde4461ac27dd2e344902cd6d2048d17761277c02a"
+    },
+    {
+      "path": "brand/png/ui/runcast-mark-16@2x.png",
+      "role": "ui-mark-16-at-2x",
+      "bytes": 726,
+      "sha256": "78f84dd41fdfaf3db08af14e06f5ede10b7ea3fb1ec6521d8b95e7ba6bbc6499"
+    },
+    {
+      "path": "brand/png/ui/runcast-mark-16@3x.png",
+      "role": "ui-mark-16-at-3x",
+      "bytes": 1044,
+      "sha256": "ce836e6c7764044e64d7c39c4e5c270e7cf9abf1fc7e835a41a4e3218d0e7581"
+    },
+    {
+      "path": "brand/png/ui/runcast-mark-24@1x.png",
+      "role": "ui-mark-24-at-1x",
+      "bytes": 572,
+      "sha256": "a9db7de925c598fdbbcbd82f543b8196ac0de5b0940cbc473cfc42ae9733bd31"
+    },
+    {
+      "path": "brand/png/ui/runcast-mark-24@2x.png",
+      "role": "ui-mark-24-at-2x",
+      "bytes": 1044,
+      "sha256": "ce836e6c7764044e64d7c39c4e5c270e7cf9abf1fc7e835a41a4e3218d0e7581"
+    },
+    {
+      "path": "brand/png/ui/runcast-mark-24@3x.png",
+      "role": "ui-mark-24-at-3x",
+      "bytes": 1508,
+      "sha256": "e1f42174728e65161c010232ebbd8e4f6f12328201dc21a49d00354410e66919"
+    },
+    {
+      "path": "brand/png/ui/runcast-mark-32@1x.png",
+      "role": "ui-mark-32-at-1x",
+      "bytes": 715,
+      "sha256": "956cd32e07a301e0a7a800a07e01b86ed9dc4d5c96e578dd1ad1306985a2159b"
+    },
+    {
+      "path": "brand/png/ui/runcast-mark-32@2x.png",
+      "role": "ui-mark-32-at-2x",
+      "bytes": 1351,
+      "sha256": "a6e1d688624610b6d0e25287ac9fc12b08a7fe1516a357c82af5f22fe9795abb"
+    },
+    {
+      "path": "brand/png/ui/runcast-mark-32@3x.png",
+      "role": "ui-mark-32-at-3x",
+      "bytes": 2011,
+      "sha256": "07db63b2ad89746dce21f2f6ce587f7749385b5bd35b4b51cd490701e696cc2e"
+    },
+    {
+      "path": "brand/png/ui/runcast-mark-48@1x.png",
+      "role": "ui-mark-48-at-1x",
+      "bytes": 1053,
+      "sha256": "d3eee3ad57f775b5c982a33fbeaf1abf8834bf16fff00d8ad8e642a35608ea7f"
+    },
+    {
+      "path": "brand/png/ui/runcast-mark-48@2x.png",
+      "role": "ui-mark-48-at-2x",
+      "bytes": 2011,
+      "sha256": "07db63b2ad89746dce21f2f6ce587f7749385b5bd35b4b51cd490701e696cc2e"
+    },
+    {
+      "path": "brand/png/ui/runcast-mark-48@3x.png",
+      "role": "ui-mark-48-at-3x",
+      "bytes": 2909,
+      "sha256": "5a4ce1997cf70ae6fb29c12240446ac602177a4d0c518b76e63323fa6d223e1d"
+    },
+    {
+      "path": "brand/png/web/favicon-16.png",
+      "role": "web-favicon-16",
+      "bytes": 449,
+      "sha256": "50256a90cb3547fe40567948bd1bb4575bdd235a0474e3b96b24ac949fda9fee"
+    },
+    {
+      "path": "brand/png/web/favicon-192.png",
+      "role": "web-favicon-192",
+      "bytes": 4270,
+      "sha256": "37755317641b122cc8d080ca94072454825b25342a29ec11b5043353d4184bdf"
+    },
+    {
+      "path": "brand/png/web/favicon-32.png",
+      "role": "web-favicon-32",
+      "bytes": 810,
+      "sha256": "a8b24ea1b75f79c23dc6228d114a847fa7f4ad815dde064661e4c1ef44170ec8"
+    },
+    {
+      "path": "brand/png/web/favicon-48.png",
+      "role": "web-favicon-48",
+      "bytes": 1176,
+      "sha256": "cd2dfdcc5231d55ead3966e6478ffd239ebac4365956008a5f3dec9820606cf7"
+    },
+    {
+      "path": "brand/svg/runcast-lockup-horizontal.svg",
+      "role": "horizontal-lockup",
+      "bytes": 34693,
+      "sha256": "8282873d96056210779676926f4f8833dd8a70a5042982ad55c5dada4fb22b90"
+    },
+    {
+      "path": "brand/svg/runcast-lockup-stacked.svg",
+      "role": "stacked-lockup",
+      "bytes": 34678,
+      "sha256": "9e54e30b110b7c43f0729716397693e81ee05fc8d831bb6ccfacadd275f80f0e"
+    },
+    {
+      "path": "brand/svg/runcast-rc-knockout.svg",
+      "role": "single-color-knockout",
+      "bytes": 17213,
+      "sha256": "b9783aaa3a6006f52a75fdb573be45891c2317e231511eb8b338f67ed8d32b11"
+    },
+    {
+      "path": "brand/svg/runcast-rc-mark.svg",
+      "role": "compact-mark",
+      "bytes": 17250,
+      "sha256": "4c425d107d09fa1088f13670693a82eac1c63b3b16a0df546fe65e6b1b3e9a71"
+    },
+    {
+      "path": "brand/svg/runcast-rc-master.svg",
+      "role": "canonical-master",
+      "bytes": 17246,
+      "sha256": "53369314ca29672f4cb63b4ae27fb447ef9d0a4659dd139ab016f1f412f7b553"
+    },
+    {
+      "path": "brand/svg/runcast-rc-micro.svg",
+      "role": "micro-mark",
+      "bytes": 17311,
+      "sha256": "ee24d54040d18c718d507ffd1a86ee7dc9bb2f09ae60754dbf9f65e833a436c7"
+    },
+    {
+      "path": "brand/svg/runcast-rc-primary.svg",
+      "role": "primary-mark",
+      "bytes": 17316,
+      "sha256": "4e710b9ea79de65d31ba3aaeafcfd628a0de850d6ad0da910e109a3bb466ba18"
+    },
+    {
+      "path": "brand/svg/runcast-rc-transparent.svg",
+      "role": "transparent-mark",
+      "bytes": 17295,
+      "sha256": "e2def813d3c8b63921b2eb19520c97231458ca9b5226e3912a876bc9c07fb5a0"
+    }
+  ]
+}

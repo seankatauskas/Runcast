@@ -1,0 +1,15 @@
+node_modules
+package-lock.json
+apps/mobile/ios
+apps/mobile/android
+**/dist
+**/.expo
+docs/*.png
+packages/core/src/data
+brand/manifest.json
+brand/png
+brand/src/geometry.json
+brand/svg
+apps/mobile/src/design/runcastGeometry.ts
+apps/web/public
+.security-review-private

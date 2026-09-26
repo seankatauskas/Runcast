@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine@sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73
+        env:
+          POSTGRES_DB: runcast_test
+          POSTGRES_USER: runcast
+          POSTGRES_PASSWORD: runcast
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U runcast -d runcast_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgres://runcast:runcast@localhost:5432/runcast_test
+      RUN_DB_TESTS: 'true'
+      NODE_ENV: test
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+      - name: Generate ephemeral test secrets
+        run: |
+          echo "ACCESS_TOKEN_SECRET=$(openssl rand -hex 32)" >> "$GITHUB_ENV"
+          echo "CREDENTIAL_ENCRYPTION_KEY=$(openssl rand -base64 32)" >> "$GITHUB_ENV"
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run architecture:check
+      - run: npm run typecheck
+      - run: npm run migrate -w apps/api
+      - run: npm test
+      - run: npm run test:integration -w apps/api
+      - run: npm run build -w apps/web
+      - run: npx --no-install expo config --type public
+        working-directory: apps/mobile
+      - run: npx --no-install expo-doctor
+        working-directory: apps/mobile
+      - run: npm run audit:release
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

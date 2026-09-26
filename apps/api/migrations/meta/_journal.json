@@ -1,0 +1,104 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1784217600000,
+      "tag": "0001_production_foundation",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1784217660000,
+      "tag": "0002_cron_heartbeat",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1784386800000,
+      "tag": "0003_strava_first_auth",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1784439000000,
+      "tag": "0004_planning_v2",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1786802400000,
+      "tag": "0005_notification_delivery_contract",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1786809600000,
+      "tag": "0006_route_library",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1788019200000,
+      "tag": "0007_canopy_v3",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1788105600000,
+      "tag": "0008_route_watch_results",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1788307260000,
+      "tag": "0009_acceptable_start_window",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1789848000000,
+      "tag": "0010_weekly_start_schedule",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1789862400000,
+      "tag": "0011_delivery_outcomes",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1789948800000,
+      "tag": "0012_receipt_schedule",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1790035200000,
+      "tag": "0013_evaluation_storage",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1790121600000,
+      "tag": "0014_retire_legacy_planning",
+      "breakpoints": true
+    }
+  ]
+}

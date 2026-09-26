@@ -1,0 +1,44 @@
+appId: com.seankatauskas.runcast.e2e
+name: notification-deep-links
+tags:
+  - beta-smoke
+  - deep-link
+---
+- launchApp:
+    clearState: true
+    clearKeychain: true
+    permissions:
+      all: deny
+- extendedWaitUntil:
+    visible:
+      id: introduction-tour
+    timeout: 15000
+- tapOn:
+    id: introduction-dismiss
+- evalScript: ${output.linkStart = Math.ceil((Date.now() + 86400000) / 900000) * 900000}
+- openLink:
+    link: ${'runcast-e2e://routes/chicago-lakefront-trail?start=' + output.linkStart}
+- runFlow:
+    when:
+      visible: 'Open in "Runcast E2E"'
+    commands:
+      - tapOn: Open
+- extendedWaitUntil:
+    visible:
+      id: planner-screen
+    timeout: 10000
+- assertVisible: Lakefront Trail
+- openLink:
+    link: runcast-e2e://routes/11111111-1111-4111-8111-111111111111?start=1786813200000
+- runFlow:
+    when:
+      visible: 'Open in "Runcast E2E"'
+    commands:
+      - tapOn: Open
+- extendedWaitUntil:
+    visible:
+      id: route-deep-link-title
+    timeout: 10000
+- assertVisible: Sign in to open this route
+- assertVisible:
+    id: route-deep-link-back

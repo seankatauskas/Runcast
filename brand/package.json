@@ -1,0 +1,15 @@
+{
+  "name": "@runcast/brand",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "import:trace": "node scripts/import-trace.mjs",
+    "generate": "node scripts/generate.mjs",
+    "validate": "node scripts/validate.mjs",
+    "test": "npm run generate && npm run validate"
+  },
+  "devDependencies": {
+    "sharp": "0.34.5"
+  }
+}

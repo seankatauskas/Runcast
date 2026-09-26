@@ -1,0 +1,14 @@
+{
+  "name": "Runcast Forward Terminals RC monogram",
+  "version": 1,
+  "masterSize": 1254,
+  "brandBlack": "#050707",
+  "brandTeal": "#67D5D6",
+  "dotOutlineWidth": 10,
+  "microDotOutlineWidth": 32,
+  "clearSpace": 77,
+  "minimumSize": 32,
+  "microMinimumSize": 16,
+  "wordmarkFamily": "Space Grotesk",
+  "wordmarkWeight": 700
+}

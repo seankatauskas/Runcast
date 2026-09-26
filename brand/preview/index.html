@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Runcast production identity preview</title>
+    <style>
+      @font-face {
+        font-family: 'Space Grotesk';
+        font-weight: 700;
+        src: url('../../node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2')
+          format('woff2');
+      }
+      :root {
+        color-scheme: dark;
+        font-family: system-ui, sans-serif;
+        background: #101012;
+        color: #f4f4f2;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 32px;
+      }
+      main {
+        max-width: 1160px;
+        margin: auto;
+      }
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+      h1 {
+        font:
+          700 32px/1.1 'Space Grotesk',
+          sans-serif;
+      }
+      h2 {
+        margin-bottom: 16px;
+        font:
+          700 18px/1.2 'Space Grotesk',
+          sans-serif;
+      }
+      p {
+        color: #b3b3ad;
+        margin-top: 8px;
+      }
+      section {
+        margin-top: 32px;
+        padding: 24px;
+        background: #1f1f24;
+        border: 1px solid #3a3a43;
+        border-radius: 16px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 16px;
+      }
+      .tile {
+        min-height: 132px;
+        padding: 16px;
+        display: grid;
+        place-items: center;
+        gap: 10px;
+        background: #050707;
+        border: 1px solid #3a3a43;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .tile span {
+        color: #b3b3ad;
+        font-size: 12px;
+      }
+      .size-row {
+        display: flex;
+        min-height: 180px;
+        align-items: end;
+        gap: 24px;
+        overflow-x: auto;
+      }
+      .size-sample {
+        flex: none;
+        display: grid;
+        justify-items: center;
+        gap: 8px;
+      }
+      .size-sample img {
+        display: block;
+      }
+      .launcher {
+        width: 132px;
+        height: 132px;
+        object-fit: cover;
+      }
+      .circle {
+        border-radius: 50%;
+      }
+      .squircle {
+        border-radius: 28%;
+      }
+      .rounded-square {
+        border-radius: 18%;
+      }
+      .themed {
+        width: 132px;
+        height: 132px;
+        background: #67d5d6;
+        -webkit-mask: url('../png/platform/android-monochrome-1024.png') center / contain no-repeat;
+        mask: url('../png/platform/android-monochrome-1024.png') center / contain no-repeat;
+      }
+      .splash {
+        width: min(260px, 100%);
+        aspect-ratio: 9 / 16;
+        display: grid;
+        place-items: center;
+        background: #050707;
+        border: 1px solid #3a3a43;
+      }
+      .splash img {
+        width: 58%;
+      }
+      .controls {
+        display: flex;
+        gap: 20px;
+      }
+      .control-card {
+        padding: 16px;
+        display: grid;
+        place-items: center;
+        gap: 8px;
+        color: #64746f;
+        background: #ffffff;
+        border-radius: 12px;
+      }
+      .control-card.dark {
+        color: #969690;
+        background: #29292f;
+      }
+      .control {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        background: inherit;
+        border: 1px solid currentColor;
+        border-radius: 50%;
+      }
+      .control-mark {
+        width: 28px;
+        height: 28px;
+        background: #67d5d6;
+        -webkit-mask: url('../png/platform/android-monochrome-1024.png') center / contain no-repeat;
+        mask: url('../png/platform/android-monochrome-1024.png') center / contain no-repeat;
+      }
+      .lockups img {
+        display: block;
+        width: 100%;
+        max-height: 280px;
+      }
+      @media (max-width: 620px) {
+        body {
+          padding: 16px;
+        }
+        section {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Runcast production identity</h1>
+      <p>#67D5D6 on #050707 · exact Forward Terminals trace · flat artwork only</p>
+
+      <section>
+        <h2>Standard and micro sizing</h2>
+        <div class="size-row">
+          <div class="size-sample">
+            <img src="../svg/runcast-rc-micro.svg" width="16" height="16" alt="" /><span
+              >16 micro</span
+            >
+          </div>
+          <div class="size-sample">
+            <img src="../svg/runcast-rc-micro.svg" width="24" height="24" alt="" /><span
+              >24 micro</span
+            >
+          </div>
+          <div class="size-sample">
+            <img src="../svg/runcast-rc-mark.svg" width="32" height="32" alt="" /><span
+              >32 standard</span
+            >
+          </div>
+          <div class="size-sample">
+            <img src="../svg/runcast-rc-mark.svg" width="48" height="48" alt="" /><span
+              >48 standard</span
+            >
+          </div>
+          <div class="size-sample">
+            <img src="../svg/runcast-rc-primary.svg" width="128" height="128" alt="" /><span
+              >512 preview</span
+            >
+          </div>
+          <div class="size-sample">
+            <img src="../svg/runcast-rc-primary.svg" width="180" height="180" alt="" /><span
+              >1024 preview</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Launcher masks and Android theme</h2>
+        <div class="grid">
+          <div class="tile">
+            <img
+              class="launcher circle"
+              src="../png/platform/android-adaptive-foreground-1024.png"
+              alt="Circle mask"
+            /><span>Circle</span>
+          </div>
+          <div class="tile">
+            <img
+              class="launcher squircle"
+              src="../png/platform/android-adaptive-foreground-1024.png"
+              alt="Squircle mask"
+            /><span>Squircle</span>
+          </div>
+          <div class="tile">
+            <img
+              class="launcher rounded-square"
+              src="../png/platform/android-adaptive-foreground-1024.png"
+              alt="Rounded-square mask"
+            /><span>Rounded square</span>
+          </div>
+          <div class="tile">
+            <img
+              class="launcher"
+              src="../png/platform/ios-app-icon-1024.png"
+              alt="Legacy square icon"
+            /><span>Legacy</span>
+          </div>
+          <div class="tile">
+            <div class="themed" role="img" aria-label="System-tinted themed icon"></div>
+            <span>Themed tint</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Splash and Explorer control</h2>
+        <div class="grid">
+          <div class="tile">
+            <div class="splash">
+              <img src="../png/platform/splash-1024.png" alt="Splash artwork on brand black" />
+            </div>
+            <span>Production splash composition</span>
+          </div>
+          <div class="tile">
+            <div class="controls">
+              <div class="control-card">
+                <div class="control"><div class="control-mark" aria-hidden="true"></div></div>
+                <span>Light</span>
+              </div>
+              <div class="control-card dark">
+                <div class="control"><div class="control-mark" aria-hidden="true"></div></div>
+                <span>Dark</span>
+              </div>
+            </div>
+            <span>44pt target · card-colored surface</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="lockups">
+        <h2>Lockups</h2>
+        <div class="grid">
+          <div class="tile">
+            <img src="../svg/runcast-lockup-horizontal.svg" alt="Runcast horizontal lockup" />
+          </div>
+          <div class="tile">
+            <img src="../svg/runcast-lockup-stacked.svg" alt="Runcast stacked lockup" />
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+node_modules
+dist
+.DS_Store
+*.local
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.expo
+apps/mobile/.expo
+apps/mobile/ios
+apps/mobile/android
+coverage
+.security-review-private/
+*.log
+__pycache__/
+*.py[cod]

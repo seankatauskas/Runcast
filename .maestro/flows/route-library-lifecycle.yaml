@@ -1,0 +1,84 @@
+appId: com.seankatauskas.runcast.e2e
+name: route-library-lifecycle
+tags:
+  - beta-smoke
+  - route-library
+---
+- launchApp:
+    clearState: true
+    clearKeychain: true
+    permissions:
+      all: deny
+- extendedWaitUntil:
+    visible:
+      id: introduction-tour
+    timeout: 15000
+- tapOn:
+    id: introduction-dismiss
+- tapOn:
+    id: route-picker
+- tapOn:
+    id: e2e-import-route
+- assertVisible:
+    id: active-route-name
+    text: Maestro Lake Loop
+- tapOn:
+    id: route-picker
+- swipe:
+    start: '45%,48%'
+    end: '45%,22%'
+    duration: 500
+- tapOn:
+    id: manage-route-library
+- assertVisible:
+    id: route-library
+- assertVisible: 1 route
+- tapOn:
+    id: route-rename-8cbd2d47-16b3-4f35-910f-2b99c54d5636
+- tapOn:
+    id: route-name-input
+- eraseText
+- inputText: Beta Morning Loop
+- tapOn:
+    id: route-name-save
+- assertVisible: Beta Morning Loop was renamed.
+- killApp
+- launchApp:
+    stopApp: false
+    permissions:
+      all: deny
+- extendedWaitUntil:
+    visible:
+      id: explorer-screen
+    timeout: 15000
+- tapOn:
+    id: route-picker
+- swipe:
+    start: '45%,48%'
+    end: '45%,22%'
+    duration: 500
+- tapOn:
+    id: manage-route-library
+- assertVisible: '.*Beta Morning Loop.*'
+- tapOn: Use Beta Morning Loop
+- tapOn:
+    id: route-picker
+- tapOn:
+    id: e2e-import-route
+- assertVisible: Route already added
+- assertVisible: Beta Morning Loop is already in your Route Library.
+- tapOn: OK
+- tapOn:
+    id: route-picker
+- swipe:
+    start: '45%,48%'
+    end: '45%,22%'
+    duration: 500
+- tapOn:
+    id: manage-route-library
+- tapOn:
+    id: route-delete-8cbd2d47-16b3-4f35-910f-2b99c54d5636
+- assertVisible: Delete Beta Morning Loop?
+- tapOn: Delete
+- assertVisible: Route deleted.
+- assertVisible: Import a GPX from the Explorer route menu, or add routes from Strava.

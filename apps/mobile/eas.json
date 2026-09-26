@@ -1,0 +1,59 @@
+{
+  "cli": {
+    "version": "21.0.2",
+    "appVersionSource": "remote",
+    "requireCommit": true
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "channel": "development",
+      "environment": "development",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "http://localhost:3000",
+        "EXPO_PUBLIC_APP_ENV": "development",
+        "EXPO_PUBLIC_CANOPY_MODEL_MODE": "active"
+      }
+    },
+    "e2e": {
+      "extends": "preview",
+      "channel": "e2e",
+      "environment": "development",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "http://localhost:3000",
+        "EXPO_PUBLIC_APP_ENV": "e2e",
+        "EXPO_PUBLIC_CANOPY_MODEL_MODE": "active",
+        "EXPO_PUBLIC_E2E_MODE": "enabled"
+      },
+      "ios": {
+        "simulator": true
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "channel": "staging",
+      "environment": "preview",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://runcast-api-staging.onrender.com",
+        "EXPO_PUBLIC_APP_ENV": "preview",
+        "EXPO_PUBLIC_CANOPY_MODEL_MODE": "active"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "channel": "production",
+      "environment": "production",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://api.runcast.app",
+        "EXPO_PUBLIC_APP_ENV": "production",
+        "EXPO_PUBLIC_CANOPY_MODEL_MODE": "active"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {}
+    }
+  }
+}

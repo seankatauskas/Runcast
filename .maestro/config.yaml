@@ -1,0 +1,13 @@
+flows:
+  - 'flows/*'
+executionOrder:
+  continueOnFailure: false
+  flowsOrder:
+    - introduction-demo
+    - route-library-lifecycle
+    - forecast-retry
+    - prerun-briefing
+    - notification-deep-links
+platform:
+  ios:
+    snapshotKeyHonorModalViews: true

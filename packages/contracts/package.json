@@ -1,0 +1,23 @@
+{
+  "name": "@runcast/contracts",
+  "private": true,
+  "version": "0.3.0",
+  "type": "module",
+  "description": "Versioned Runcast API schemas shared by the server and clients.",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.10"
+  }
+}

@@ -1,0 +1,36 @@
+appId: com.seankatauskas.runcast.e2e
+name: forecast-retry
+tags:
+  - beta-smoke
+  - forecast
+---
+- launchApp:
+    clearState: true
+    clearKeychain: true
+    permissions:
+      all: deny
+- extendedWaitUntil:
+    visible:
+      id: introduction-tour
+    timeout: 15000
+- tapOn:
+    id: introduction-dismiss
+- tapOn:
+    id: route-picker
+- tapOn:
+    id: e2e-import-route
+- extendedWaitUntil:
+    visible:
+      id: forecast-error
+    timeout: 10000
+- assertVisible:
+    id: forecast-retry
+- tapOn:
+    id: forecast-retry
+- extendedWaitUntil:
+    visible:
+      id: forecast-ready
+    timeout: 10000
+- assertVisible:
+    id: active-route-name
+    text: Maestro Lake Loop

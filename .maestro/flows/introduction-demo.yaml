@@ -1,0 +1,97 @@
+appId: com.seankatauskas.runcast.e2e
+name: introduction-demo
+tags:
+  - beta-smoke
+  - introduction
+---
+- launchApp:
+    clearState: true
+    clearKeychain: true
+    permissions:
+      all: deny
+- extendedWaitUntil:
+    visible:
+      id: introduction-tour
+    timeout: 15000
+- tapOn:
+    id: introduction-primary
+- assertVisible:
+    id: introduction-progress
+- assertVisible:
+    id: introduction-title
+    text: Route
+- assertVisible:
+    id: introduction-highlight-route-picker
+- tapOn:
+    id: introduction-primary
+- assertVisible:
+    id: introduction-progress
+- assertVisible:
+    id: introduction-title
+    text: Start time
+- assertVisible:
+    id: introduction-highlight-start-time
+- tapOn:
+    id: introduction-primary
+- assertVisible:
+    id: introduction-progress
+- assertVisible:
+    id: introduction-title
+    text: Pace
+- assertVisible:
+    id: introduction-highlight-pace
+- tapOn:
+    id: introduction-primary
+- assertVisible:
+    id: introduction-progress
+- assertVisible:
+    id: introduction-title
+    text: Best-start conditions
+- assertVisible:
+    id: introduction-highlight-along-route
+- tapOn:
+    id: introduction-primary
+- extendedWaitUntil:
+    visible:
+      id: introduction-progress
+    timeout: 5000
+- assertVisible:
+    id: introduction-progress
+- assertVisible:
+    id: introduction-title
+    text: Day outlook
+- assertVisible:
+    id: introduction-highlight-day-outlook
+- tapOn:
+    id: introduction-primary
+- assertVisible:
+    id: introduction-progress
+- assertVisible:
+    id: introduction-title
+    text: Route watch
+- assertVisible:
+    id: introduction-highlight-watch-route
+- tapOn:
+    id: introduction-primary
+- assertNotVisible:
+    id: introduction-tour
+- assertVisible:
+    id: explorer-screen
+- assertVisible: Central Park Loop
+- tapOn:
+    id: route-picker
+- scrollUntilVisible:
+    element:
+      id: manage-route-library
+    direction: DOWN
+- tapOn:
+    point: '92%,75%'
+- tapOn: Open Runcast menu
+- tapOn: Help & privacy
+- tapOn: 'Getting started.*'
+- extendedWaitUntil:
+    visible:
+      id: introduction-tour
+    timeout: 5000
+- assertVisible:
+    id: introduction-primary

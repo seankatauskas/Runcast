@@ -1,0 +1,58 @@
+{
+  "name": "runcast-monorepo",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "overrides": {
+    "expo": "57.0.25",
+    "expo-constants": "57.0.19",
+    "expo-dev-client": "57.0.19",
+    "expo-notifications": "57.0.21",
+    "expo-router": "57.0.23",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3"
+  },
+  "workspaces": [
+    "brand",
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "test": "npm run test -w brand && npm run test -w packages/core && npm run test -w packages/contracts && npm run test -w apps/api && npm run test -w apps/mobile && npm run test -w apps/web && npm run test:release",
+    "test:release": "vitest run scripts/*.test.mjs",
+    "audit:release": "node scripts/check-dependency-audit.mjs",
+    "typecheck": "npm run typecheck -w packages/core && npm run typecheck -w packages/contracts && npm run typecheck -w apps/api && npm run typecheck -w apps/mobile && npm run build -w apps/web",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "naming:check": "node scripts/check-naming-boundaries.mjs",
+    "architecture:check": "npm run naming:check && npm run test:architecture -w apps/api",
+    "hooks:install": "git config core.hooksPath .githooks",
+    "dev": "npm run dev -w apps/web",
+    "dev:api": "npm run dev -w apps/api",
+    "db:up": "docker compose up -d postgres",
+    "db:migrate": "npm run migrate -w apps/api",
+    "build": "npm run build -w apps/web",
+    "benchmark:v2": "npm exec -w apps/api -- tsx ../../packages/core/benchmarks/v2-diagnostics.ts",
+    "benchmark:v2:cached-api": "npm exec -w apps/api -- tsx benchmarks/cached-bundle-api.ts",
+    "benchmark:v2:provider": "npm exec -w apps/api -- tsx benchmarks/provider-preparation.ts",
+    "benchmark:v2:scheduler": "npm exec -w apps/api -- tsx benchmarks/scheduler-batch.ts",
+    "canopy:generate": "npm exec -w apps/api -- tsx ../../scripts/generate-canopy-sidecars.ts",
+    "fetch-routes": "node scripts/fetch-routes.mjs",
+    "brand:generate": "npm run generate -w brand",
+    "brand:validate": "npm run validate -w brand",
+    "e2e:mobile": "maestro test .maestro"
+  },
+  "devDependencies": {
+    "expo": "57.0.25",
+    "playwright-core": "^1.60.0",
+    "prettier": "^3.6.2",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "typescript": "^5.6.3",
+    "vitest": "^4.1.10"
+  }
+}

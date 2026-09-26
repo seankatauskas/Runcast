@@ -1,0 +1,43 @@
+{
+  "name": "@runcast/api",
+  "private": true,
+  "version": "0.3.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "tsx src/server.ts",
+    "cron": "tsx src/cron.ts",
+    "migrate": "tsx src/db/migrate.ts",
+    "build:production": "esbuild src/server.ts src/cron.ts src/db/migrate.ts src/measureEvaluationStorage.ts --bundle --platform=node --format=esm --packages=external --alias:@runcast/contracts=../../packages/contracts/src/index.ts --alias:@runcast/core=../../packages/core/src/index.ts --outdir=dist",
+    "start:production": "node dist/server.js",
+    "cron:production": "node dist/cron.js",
+    "migrate:production": "node dist/db/migrate.js",
+    "test": "vitest run",
+    "test:architecture": "vitest run src/planning/boundaries.test.ts",
+    "test:integration": "vitest run src/db/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "storage:measure": "tsx src/measureEvaluationStorage.ts",
+    "storage:measure:production": "node dist/measureEvaluationStorage.js"
+  },
+  "dependencies": {
+    "@fastify/compress": "^8.1.0",
+    "@fastify/cors": "^11.1.0",
+    "@fastify/rate-limit": "^10.3.0",
+    "@fastify/swagger": "^9.5.2",
+    "@fastify/swagger-ui": "^6.1.1",
+    "@runcast/contracts": "*",
+    "@runcast/core": "*",
+    "drizzle-orm": "^0.45.2",
+    "fastify": "^5.6.2",
+    "jose": "^6.1.0",
+    "luxon": "^3.7.2",
+    "postgres": "^3.4.7",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.7.1",
+    "esbuild": "0.25.12",
+    "tsx": "^4.20.6",
+    "vitest": "^4.1.10"
+  }
+}

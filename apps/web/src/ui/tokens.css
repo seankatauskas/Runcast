@@ -1,0 +1,195 @@
+/**
+ * Runcast design tokens — the only file in the app allowed to contain raw
+ * color values. Two layers:
+ *   1. primitives (--grey-*, --heat-*, …) — raw values, theme-independent
+ *   2. semantic aliases (--bg, --surface, --text, …) — what components use;
+ *      flipped by [data-theme="dark"]
+ * The data colors (heat ramp, sun/shade bands, wind accent) are the only
+ * saturated elements on screen; all chrome is warm grey.
+ * JS consumers (MapLibre, canvas) read the same values from tokens.ts.
+ */
+
+:root {
+  /* ---- primitives: warm-grey neutrals ---- */
+  --grey-0: #fcfcfb;
+  --grey-1: #f4f4f2;
+  --grey-2: #e8e8e4;
+  --grey-3: #d4d4cf;
+  --grey-4: #b3b3ad;
+  --grey-5: #8c8c86;
+  --grey-6: #6e6e68;
+  --grey-7: #4c4c47;
+  --grey-8: #34342f;
+  --grey-9: #1f1f1c;
+  --ink-0: #101012;
+  --ink-1: #17171a;
+  --ink-2: #1f1f24;
+  --ink-3: #2a2a31;
+  --ink-4: #3a3a43;
+
+  /* ---- primitives: data colors (the only saturation on screen) ---- */
+  --heat-cold: #0e7490;
+  --heat-cool: #14b8a6;
+  --heat-mild: #d9c58a;
+  --heat-warm: #f59e0b;
+  --heat-hot: #ea580c;
+  --heat-extreme: #dc2626;
+  --sun-band: rgba(251, 191, 36, 0.26);
+  --shade-band: rgba(100, 116, 139, 0.22);
+  --night-band: rgba(67, 56, 202, 0.24);
+  --wind-accent: #6366f1;
+  --rain: #3b82f6;
+  --warn: #d97706;
+  --danger: #dc2626;
+
+  /* ---- brand accent: teal means action, selection, and route.
+     Filled controls and ink use different lightness for their jobs. ---- */
+  --accent-ink-light: #007a7e;
+  --accent-fill-light: #53c7c7;
+  --accent-dark: #67d5d6;
+
+  /* ---- type ---- */
+  --font-sans: 'Inter var', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', var(--font-sans);
+  --text-xs: 0.6875rem; /* 11 */
+  --text-sm: 0.8125rem; /* 13 */
+  --text-base: 0.875rem; /* 14 */
+  --text-lg: 1rem; /* 16 */
+  --text-xl: 1.25rem; /* 20 */
+  --text-2xl: 1.75rem; /* 28 */
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --tracking-wide: 0.06em;
+
+  /* ---- spacing (4px base) ---- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+
+  /* ---- radii, borders, shadows, motion ---- */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 12px;
+  --r-full: 999px;
+  --shadow-1: 0 1px 2px rgba(21, 36, 34, 0.08), 0 3px 10px rgba(21, 36, 34, 0.08);
+  --shadow-2: 0 2px 4px rgba(21, 36, 34, 0.1), 0 10px 28px rgba(21, 36, 34, 0.14);
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --dur: 180ms;
+  --dur-slow: 250ms;
+
+  /* ---- semantic: light theme ---- */
+  --bg: #e8eeec;
+  --surface: #f5f8f7;
+  --surface-raised: #ffffff;
+  --border: #becac6;
+  --border-strong: #839690;
+  --text: #152422;
+  --text-secondary: #4f615d;
+  --text-faint: #64746f;
+  --control-bg: #dce6e3;
+  --control-active: var(--accent-fill-light);
+  --control-active-text: #052b2b;
+  --accent: var(--accent-ink-light);
+  --good: var(--accent-ink-light);
+  --route: #007f83;
+  --route-casing: rgba(11, 52, 53, 0.72);
+  --skeleton: linear-gradient(90deg, var(--grey-2) 25%, var(--grey-1) 45%, var(--grey-2) 65%);
+}
+
+[data-theme='dark'] {
+  --bg: var(--ink-0);
+  --surface: var(--ink-1);
+  --surface-raised: var(--ink-2);
+  --border: rgba(252, 252, 251, 0.12);
+  --border-strong: rgba(252, 252, 251, 0.24);
+  --text: var(--grey-1);
+  --text-secondary: var(--grey-4);
+  --text-faint: var(--grey-5);
+  --control-bg: var(--ink-3);
+  --control-active: var(--accent-dark);
+  --control-active-text: #050707;
+  --accent: var(--accent-dark);
+  --good: var(--accent-dark);
+  --route: var(--accent-dark);
+  --route-casing: rgba(0, 0, 0, 0.7);
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.45);
+  --skeleton: linear-gradient(90deg, var(--ink-3) 25%, var(--ink-2) 45%, var(--ink-3) 65%);
+}
+
+/* ---- base ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Data readouts use tabular numerals so values don't jitter as they tick. */
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton {
+  background: var(--skeleton);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: var(--r-sm);
+  color: transparent;
+  user-select: none;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}

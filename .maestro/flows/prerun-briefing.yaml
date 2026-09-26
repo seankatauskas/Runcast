@@ -1,0 +1,74 @@
+appId: com.seankatauskas.runcast.e2e
+name: prerun-briefing
+tags:
+  - beta-smoke
+  - forecast
+---
+- launchApp:
+    clearState: true
+    clearKeychain: true
+    permissions:
+      all: deny
+- extendedWaitUntil:
+    visible:
+      id: introduction-tour
+    timeout: 15000
+- tapOn:
+    id: introduction-dismiss
+- extendedWaitUntil:
+    visible:
+      id: prerun-briefing
+    timeout: 15000
+- assertVisible:
+    id: run-finish-summary
+- assertNotVisible:
+    id: comparison-reference
+- assertNotVisible:
+    id: explorer-start-difference
+- assertVisible:
+    id: explorer-best-time
+- copyTextFrom:
+    id: run-finish-summary
+- evalScript: ${output.firstFinish = maestro.copiedText}
+- tapOn:
+    id: choose-another-start-time
+- tapOn: Tomorrow
+- tapOn:
+    id: day-start-chart
+    point: '50%,50%'
+- assertVisible:
+    id: start-time-comparison
+- tapOn:
+    id: start-time-picker-done
+- assertNotVisible:
+    id: start-time-picker-sheet
+- assertVisible:
+    id: explorer-screen
+- assertNotVisible:
+    id: planner-screen
+- copyTextFrom:
+    id: run-finish-summary
+- evalScript: ${output.explorerFinish = maestro.copiedText}
+- tapOn:
+    id: open-best-run-plan
+- assertVisible:
+    id: planner-screen
+- assertVisible:
+    id: prerun-briefing
+- copyTextFrom:
+    id: run-finish-summary
+- evalScript: ${output.selectedFinish = maestro.copiedText}
+- assertTrue: ${output.selectedFinish !== output.firstFinish}
+- assertTrue: ${output.selectedFinish === output.explorerFinish}
+- tapOn: Back to Explorer
+- assertVisible: SELECTED TIME
+- copyTextFrom:
+    id: run-finish-summary
+- assertTrue: ${maestro.copiedText === output.selectedFinish}
+- assertVisible:
+    id: prerun-briefing
+- tapOn:
+    id: open-best-run-plan
+- copyTextFrom:
+    id: run-finish-summary
+- assertTrue: ${maestro.copiedText === output.selectedFinish}

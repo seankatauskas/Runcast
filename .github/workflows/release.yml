@@ -1,0 +1,100 @@
+name: Production mobile release
+
+on:
+  push:
+    tags:
+      - 'mobile-v*.*.*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-mobile-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 90
+    services:
+      postgres:
+        image: postgres:17-alpine@sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73
+        env:
+          POSTGRES_DB: runcast_test
+          POSTGRES_USER: runcast
+          POSTGRES_PASSWORD: runcast
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U runcast -d runcast_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgres://runcast:runcast@localhost:5432/runcast_test
+      RUN_DB_TESTS: 'true'
+      NODE_ENV: test
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+      - name: Generate ephemeral test secrets
+        run: |
+          echo "ACCESS_TOKEN_SECRET=$(openssl rand -hex 32)" >> "$GITHUB_ENV"
+          echo "CREDENTIAL_ENCRYPTION_KEY=$(openssl rand -base64 32)" >> "$GITHUB_ENV"
+      - run: npm ci
+      - name: Verify tag and app version
+        run: node scripts/verify-mobile-tag.mjs "$GITHUB_REF_NAME"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm run format:check
+      - run: npm run naming:check
+      - run: npm run typecheck
+      - run: npm run migrate -w apps/api
+      - run: npm test
+      - run: npm run test:integration -w apps/api
+      - run: npm run build -w apps/web
+      - name: Verify production Expo public config
+        run: node scripts/verify-expo-release.mjs apps/mobile
+        env:
+          EAS_PROJECT_ID: ${{ secrets.EAS_PROJECT_ID }}
+          EXPO_PUBLIC_API_URL: https://api.runcast.app
+          EXPO_PUBLIC_APP_ENV: production
+          EXPO_PUBLIC_LEGAL_BASE_URL: https://runcast-legal.onrender.com
+      - run: npx --no-install expo-doctor
+        working-directory: apps/mobile
+      - run: npm run audit:release
+      - name: Deploy tagged production API
+        env:
+          DEPLOY_HOOK: ${{ secrets.RENDER_PRODUCTION_DEPLOY_HOOK }}
+        run: curl --fail --silent --show-error --request POST "${DEPLOY_HOOK}&ref=${GITHUB_SHA}"
+      - name: Deploy tagged production scheduler
+        env:
+          DEPLOY_HOOK: ${{ secrets.RENDER_PRODUCTION_CRON_DEPLOY_HOOK }}
+        run: curl --fail --silent --show-error --request POST "${DEPLOY_HOOK}&ref=${GITHUB_SHA}"
+      - name: Deploy tagged legal site
+        env:
+          DEPLOY_HOOK: ${{ secrets.RENDER_LEGAL_DEPLOY_HOOK }}
+        run: curl --fail --silent --show-error --request POST "${DEPLOY_HOOK}&ref=${GITHUB_SHA}"
+      - name: Verify production API, planner, scheduler, and legal release
+        run: >-
+          node scripts/verify-release.mjs
+          https://api.runcast.app
+          https://runcast-legal.onrender.com
+          "$GITHUB_SHA"
+          production
+      - uses: expo/expo-github-action@c7b66a9c327a43a8fa7c0158e7f30d6040d2481e # v8.2.1
+        with:
+          eas-version: 21.0.2
+          packager: npm
+          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Build and submit iOS binary
+        working-directory: apps/mobile
+        env:
+          EAS_PROJECT_ID: ${{ secrets.EAS_PROJECT_ID }}
+        run: eas build --platform ios --profile production --auto-submit --non-interactive

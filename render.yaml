@@ -1,0 +1,184 @@
+services:
+  - type: web
+    runtime: docker
+    name: runcast-api-staging
+    region: ohio
+    plan: starter
+    branch: main
+    autoDeployTrigger: checksPass
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health/ready
+    preDeployCommand: node apps/api/dist/db/migrate.js
+    maxShutdownDelaySeconds: 60
+    envVars:
+      - fromGroup: runcast-staging
+      - key: DATABASE_URL
+        fromDatabase:
+          name: runcast-db-staging
+          property: connectionString
+      - key: APPLE_CLIENT_ID
+        sync: false
+      - key: APPLE_TEAM_ID
+        sync: false
+      - key: APPLE_KEY_ID
+        sync: false
+      - key: APPLE_PRIVATE_KEY
+        sync: false
+      - key: STRAVA_CLIENT_ID
+        sync: false
+      - key: STRAVA_CLIENT_SECRET
+        sync: false
+      - key: EXPO_ACCESS_TOKEN
+        sync: false
+
+  - type: cron
+    runtime: docker
+    name: runcast-cron-staging
+    region: ohio
+    plan: starter
+    branch: main
+    autoDeployTrigger: checksPass
+    dockerfilePath: ./Dockerfile
+    dockerCommand: node apps/api/dist/cron.js
+    schedule: '*/15 * * * *'
+    envVars:
+      - fromGroup: runcast-staging
+      - key: DATABASE_URL
+        fromDatabase:
+          name: runcast-db-staging
+          property: connectionString
+      - key: EXPO_ACCESS_TOKEN
+        sync: false
+
+  - type: web
+    runtime: docker
+    name: runcast-api-production
+    region: ohio
+    plan: starter
+    branch: main
+    autoDeployTrigger: off
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health/ready
+    preDeployCommand: node apps/api/dist/db/migrate.js
+    maxShutdownDelaySeconds: 60
+    domains:
+      - api.runcast.app
+    renderSubdomainPolicy: disabled
+    envVars:
+      - fromGroup: runcast-production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: runcast-db-production
+          property: connectionString
+      - key: APPLE_CLIENT_ID
+        sync: false
+      - key: APPLE_TEAM_ID
+        sync: false
+      - key: APPLE_KEY_ID
+        sync: false
+      - key: APPLE_PRIVATE_KEY
+        sync: false
+      - key: STRAVA_CLIENT_ID
+        sync: false
+      - key: STRAVA_CLIENT_SECRET
+        sync: false
+      - key: EXPO_ACCESS_TOKEN
+        sync: false
+
+  - type: cron
+    runtime: docker
+    name: runcast-cron-production
+    region: ohio
+    plan: starter
+    branch: main
+    autoDeployTrigger: off
+    dockerfilePath: ./Dockerfile
+    dockerCommand: node apps/api/dist/cron.js
+    schedule: '*/15 * * * *'
+    envVars:
+      - fromGroup: runcast-production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: runcast-db-production
+          property: connectionString
+      - key: EXPO_ACCESS_TOKEN
+        sync: false
+
+  - type: web
+    runtime: static
+    name: runcast-legal
+    plan: free
+    branch: main
+    autoDeployTrigger: off
+    buildCommand: npm ci && npm run build -w apps/web
+    staticPublishPath: ./apps/web/dist
+    renderSubdomainPolicy: enabled
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /release.json
+        name: Cache-Control
+        value: no-store
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+
+databases:
+  - name: runcast-db-staging
+    databaseName: runcast_staging
+    user: runcast_staging
+    region: ohio
+    plan: basic-256mb
+    ipAllowList: []
+  - name: runcast-db-production
+    databaseName: runcast_production
+    user: runcast_production
+    region: ohio
+    plan: basic-256mb
+    ipAllowList: []
+
+envVarGroups:
+  - name: runcast-staging
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENAPI_ENABLED
+        value: true
+      - key: ACCESS_TOKEN_SECRET
+        generateValue: true
+      - key: CREDENTIAL_ENCRYPTION_KEY
+        generateValue: true
+      - key: STRAVA_CALLBACK_URL
+        value: https://runcast-api-staging.onrender.com/v1/integrations/strava/callback
+      - key: MOBILE_DEEP_LINK
+        value: runcast-preview://account
+      - key: DEPLOYMENT_ENVIRONMENT
+        value: staging
+      - key: CANOPY_MODEL_MODE
+        value: active
+  - name: runcast-production
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENAPI_ENABLED
+        value: false
+      - key: ACCESS_TOKEN_SECRET
+        generateValue: true
+      - key: CREDENTIAL_ENCRYPTION_KEY
+        generateValue: true
+      - key: STRAVA_CALLBACK_URL
+        value: https://api.runcast.app/v1/integrations/strava/callback
+      - key: MOBILE_DEEP_LINK
+        value: runcast://account
+      - key: DEPLOYMENT_ENVIRONMENT
+        value: production
+      - key: CANOPY_MODEL_MODE
+        value: active
